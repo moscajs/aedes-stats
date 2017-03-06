@@ -26,6 +26,10 @@ var aedesEvents = [
 ]
 
 function wire (aedesInstance) {
+  if (!aedesInstance) {
+    throw new Error('Need to pass an instance of aedes to enable stats')
+  }
+
   aedesInstance.stats = {
     maxConnectedClients: 0,
     connectedClients: 0,

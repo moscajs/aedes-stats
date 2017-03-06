@@ -2,17 +2,6 @@
 
 var moment = require('moment')
 
-function Stats () {
-  if (!(this instanceof Stats)) {
-    return new Stats()
-  }
-
-  this.maxConnectedClients = 0
-  this.connectedClients = 0
-  this.publishedMessages = 0
-  this.started = new Date()
-}
-
 function client () {
   this.stats.connectedClients++
   if (this.stats.connectedClients > this.stats.maxConnectedClients) {
@@ -36,14 +25,19 @@ var aedesEvents = [
   publish
 ]
 
-Stats.prototype.wire = function (aedesInstance) {
-  aedesInstance.stats = this
+function wire (aedesInstance) {
+  aedesInstance.stats = {
+    maxConnectedClients: 0,
+    connectedClients: 0,
+    publishedMessages: 0,
+    started: new Date()
+  }
 
   function doPub (topic, value) {
     aedesInstance.publish({topic: '$SYS/' + aedesInstance.id + '/' + topic, payload: '' + value})
   }
 
-  var moments = moment(this.started)
+  var moments = moment(new Date())
 
   var timer = setInterval(iterate, 1 * 1000)
 
@@ -71,5 +65,5 @@ Stats.prototype.wire = function (aedesInstance) {
   })
 }
 
-module.exports = Stats
+module.exports = wire
 

@@ -5,15 +5,13 @@ var mqtt = require('mqtt')
 var aedes = require('aedes')
 var net = require('net')
 var moment = require('moment')
-var StatsInstance = require('./index')
-var stats = new StatsInstance()
 var port = 1889
 
 test('Connect a client and subscribe to get total number of clients', function (t) {
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber
@@ -40,7 +38,7 @@ test('Connect a client and subscribe to get maximum number of clients', function
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber, additionalClient
@@ -76,7 +74,7 @@ test('Connect a client and subscribe to get current broker time', function (t) {
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber, additionalClient
@@ -112,7 +110,7 @@ test('Connect a client and subscribe to get broker up-time', function (t) {
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber
@@ -140,7 +138,7 @@ test('Connect a client and subscribe to get the number of published messages', f
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var publisher
@@ -172,7 +170,7 @@ test('Connect a client and and subscribe to get current heap usage', function (t
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber
@@ -200,7 +198,7 @@ test('Connect a client and and subscribe to get maximum heap usage', function (t
   t.plan(1)
   var instance = aedes()
   var server = net.createServer(instance.handle)
-  stats.wire(instance)
+  require('./stats')(instance)
 
   server.listen(port)
   var subscriber

@@ -189,10 +189,10 @@ test('Connect a client and and subscribe to get current heap usage', function (t
 
   subscriber.on('message', function (topic, message) {
     t.pass(message.toString(), 'bytes of heap used currently')
+    t.end()
     subscriber.end()
     instance.close()
     server.close()
-    t.end()
   })
 })
 
@@ -217,12 +217,12 @@ test('Connect a client and and subscribe to get maximum heap usage', function (t
 
   subscriber.on('message', function (topic, message) {
     t.pass(message.toString(), 'max bytes of heap used till now')
+    t.end()
     subscriber.end()
     instance.close()
-    server.close()
-    t.end()
-    process.exit(0)
+    server.close(function () {
+      process.exit(0)
+    })
   })
 })
-
 

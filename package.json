@@ -4,8 +4,13 @@
   "description": "stats for aedes",
   "main": "stats.js",
   "scripts": {
+    "lint": "standard",
     "test": "standard && tape test.js || faucet"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mcollina/aedes-stats.git"
@@ -31,6 +36,7 @@
   },
   "dependencies": {
     "moment": "^2.13.0",
-    "moving-average": "^0.1.1"
+    "moving-average": "^0.1.1",
+    "mqtt": "^2.4.0"
   }
 }

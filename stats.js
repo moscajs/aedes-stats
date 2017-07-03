@@ -23,10 +23,12 @@ var aedesEvents = [
   publish
 ]
 
-function wire (aedesInstance) {
+function wire (aedesInstance, options) {
   if (!aedesInstance) {
     throw new Error('Need to pass an instance of aedes to enable stats')
   }
+
+  options = options || {}
 
   aedesInstance.stats = {
     maxConnectedClients: 0,
@@ -40,7 +42,7 @@ function wire (aedesInstance) {
     aedesInstance.publish({topic: '$SYS/' + aedesInstance.id + '/' + topic, payload: '' + value})
   }
 
-  var timer = setInterval(iterate, 1 * 1000)
+  var timer = setInterval(iterate, options.interval || (1 * 1000))
 
   function iterate () {
     var stats = aedesInstance.stats

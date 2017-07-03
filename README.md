@@ -18,6 +18,12 @@ var instance = aedes()
 stats(aedes)
 ```
 
+## Options
+
+An object containing options can be passed in as the second argument to `stats`.
+
+* `interval`: ms to wait between publishing stats (defaults to 1000)
+
 ## Topics and Stats published
 
 * `$SYS/{ID}/uptime`

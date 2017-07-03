@@ -34,7 +34,8 @@ function wire (aedesInstance) {
     maxConnectedClients: 0,
     connectedClients: 0,
     publishedMessages: 0,
-    started: new Date()
+    started: new Date(),
+    time: new Date()
   }
 
   function doPub (topic, value) {
@@ -47,9 +48,10 @@ function wire (aedesInstance) {
 
   function iterate () {
     var stats = aedesInstance.stats
+    stats.time = new Date()
     var mem = process.memoryUsage()
     doPub('uptime', moments.from(Date.now(), true))
-    doPub('time', aedesInstance.stats.started.toISOString())
+    doPub('time', aedesInstance.stats.time.toISOString())
     doPub('clients/total', stats.connectedClients)
     doPub('clients/maximum', stats.maxConnectedClients)
     doPub('messages/publish/sent', stats.publishedMessages)

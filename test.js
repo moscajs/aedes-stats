@@ -98,7 +98,7 @@ test('Connect a client and subscribe to get current broker time', function (t) {
   subscriber.subscribe('$SYS/+/time')
 
   subscriber.on('message', function (topic, message) {
-    t.equal(instance.stats.started.toISOString(), message.toString(), 'current broker time')
+    t.equal(instance.stats.time.toISOString(), message.toString(), 'current broker time')
     subscriber.end()
     additionalClient.end()
     instance.close()

@@ -71,4 +71,3 @@ function wire (aedesInstance, options) {
 }
 
 module.exports = wire
-

@@ -222,4 +222,3 @@ test('Connect a client and and subscribe to get maximum heap usage', function (t
     })
   })
 })
-

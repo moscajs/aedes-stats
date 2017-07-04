@@ -1,7 +1,5 @@
 'use strict'
 
-var moment = require('moment')
-
 function client () {
   this.stats.connectedClients++
   if (this.stats.connectedClients > this.stats.maxConnectedClients) {
@@ -25,31 +23,34 @@ var aedesEvents = [
   publish
 ]
 
-function wire (aedesInstance) {
+function wire (aedesInstance, options) {
   if (!aedesInstance) {
     throw new Error('Need to pass an instance of aedes to enable stats')
   }
+
+  options = options || {}
 
   aedesInstance.stats = {
     maxConnectedClients: 0,
     connectedClients: 0,
     publishedMessages: 0,
-    started: new Date()
+    started: new Date(),
+    time: new Date()
   }
 
   function doPub (topic, value) {
     aedesInstance.publish({topic: '$SYS/' + aedesInstance.id + '/' + topic, payload: '' + value})
   }
 
-  var moments = moment(new Date())
-
-  var timer = setInterval(iterate, 1 * 1000)
+  var timer = setInterval(iterate, options.interval || (1 * 1000))
 
   function iterate () {
     var stats = aedesInstance.stats
+    stats.time = new Date()
+    var uptime = Math.round((stats.time - stats.started) / 1000)
     var mem = process.memoryUsage()
-    doPub('uptime', moments.from(Date.now(), true))
-    doPub('time', aedesInstance.stats.started.toISOString())
+    doPub('uptime', uptime)
+    doPub('time', aedesInstance.stats.time.toISOString())
     doPub('clients/total', stats.connectedClients)
     doPub('clients/maximum', stats.maxConnectedClients)
     doPub('messages/publish/sent', stats.publishedMessages)

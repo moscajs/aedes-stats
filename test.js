@@ -4,7 +4,6 @@ var test = require('tape').test
 var mqtt = require('mqtt')
 var aedes = require('aedes')
 var net = require('net')
-var moment = require('moment')
 var port = 1889
 
 test('Connect a client and subscribe to get total number of clients', function (t) {
@@ -98,7 +97,7 @@ test('Connect a client and subscribe to get current broker time', function (t) {
   subscriber.subscribe('$SYS/+/time')
 
   subscriber.on('message', function (topic, message) {
-    t.equal(instance.stats.started.toISOString(), message.toString(), 'current broker time')
+    t.equal(instance.stats.time.toISOString(), message.toString(), 'current broker time')
     subscriber.end()
     additionalClient.end()
     instance.close()
@@ -126,8 +125,8 @@ test('Connect a client and subscribe to get broker up-time', function (t) {
   subscriber.subscribe('$SYS/+/uptime')
 
   subscriber.on('message', function (topic, message) {
-    var moments = moment(instance.started)
-    t.equal(moments.from(Date.now(), true).toString(), message.toString(), 'Broker uptime')
+    var seconds = Math.round((instance.stats.time - instance.stats.started) / 1000)
+    t.equal(seconds.toString(), message.toString(), 'Broker uptime')
     subscriber.end()
     instance.close()
     server.close()

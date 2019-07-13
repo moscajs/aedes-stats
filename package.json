@@ -31,13 +31,11 @@
   "devDependencies": {
     "aedes": "^0.35.3",
     "faucet": "0.0.1",
+    "mqtt": "^3.0.0",
     "nyc": "^14.1.1",
     "pre-commit": "^1.2.2",
     "standard": "^12.0.1",
     "tape": "^4.9.1"
   },
-  "dependencies": {
-    "moving-average": "^1.0.0",
-    "mqtt": "^2.18.8"
-  }
+  "dependencies": {}
 }

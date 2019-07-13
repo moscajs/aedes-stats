@@ -29,13 +29,13 @@
   },
   "homepage": "https://github.com/mcollina/aedes-stats#readme",
   "devDependencies": {
-    "aedes": "^0.35.3",
+    "aedes": "^0.39.0",
     "faucet": "0.0.1",
     "mqtt": "^3.0.0",
     "nyc": "^14.1.1",
     "pre-commit": "^1.2.2",
-    "standard": "^12.0.1",
-    "tape": "^4.9.1"
+    "standard": "^13.0.2",
+    "tape": "^4.11.0"
   },
   "dependencies": {}
 }

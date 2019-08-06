@@ -39,7 +39,12 @@ function wire (aedesInstance, options) {
   }
 
   function doPub (topic, value) {
-    aedesInstance.publish({ topic: '$SYS/' + aedesInstance.id + '/' + topic, payload: '' + value })
+    aedesInstance.publish({
+      topic: '$SYS/' + aedesInstance.id + '/' + topic,
+      payload: '' + value,
+      qos: 0,
+      retain: true
+    })
   }
 
   var timer = setInterval(iterate, options.interval || (1 * 1000))

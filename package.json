@@ -4,8 +4,8 @@
   "description": "stats for aedes",
   "main": "stats.js",
   "scripts": {
-    "lint": "standard",
-    "test": "standard && tape test.js | faucet",
+    "lint": "standard --verbose | snazzy",
+    "test": "tape test.js | faucet",
     "coverage": "nyc --reporter=lcov tape test.js"
   },
   "pre-commit": [
@@ -34,7 +34,8 @@
     "mqtt": "^3.0.0",
     "nyc": "^14.1.1",
     "pre-commit": "^1.2.2",
-    "standard": "^13.0.2",
+    "snazzy": "^8.0.0",
+    "standard": "^13.1.0",
     "tape": "^4.11.0"
   },
   "dependencies": {}

@@ -8,6 +8,7 @@ var port = 1889
 
 test('Connect a client and subscribe to get total number of clients', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -35,6 +36,7 @@ test('Connect a client and subscribe to get total number of clients', function (
 
 test('Connect a client and subscribe to get maximum number of clients', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -71,6 +73,7 @@ test('Connect a client and subscribe to get maximum number of clients', function
 
 test('Connect a client and subscribe to get current broker time', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -107,6 +110,7 @@ test('Connect a client and subscribe to get current broker time', function (t) {
 
 test('Connect a client and subscribe to get broker up-time', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -135,6 +139,7 @@ test('Connect a client and subscribe to get broker up-time', function (t) {
 
 test('Connect a client and subscribe to get the number of published messages', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -167,6 +172,7 @@ test('Connect a client and subscribe to get the number of published messages', f
 
 test('Connect a client and and subscribe to get current heap usage', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)
@@ -195,6 +201,7 @@ test('Connect a client and and subscribe to get current heap usage', function (t
 
 test('Connect a client and and subscribe to get maximum heap usage', function (t) {
   t.plan(1)
+
   var instance = aedes()
   var server = net.createServer(instance.handle)
   require('./stats')(instance)

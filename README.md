@@ -1,6 +1,14 @@
 # aedes-stats
+[![Build Status](https://travis-ci.org/mcollina/aedes-stats.svg?branch=master)](https://travis-ci.org/mcollina/aedes-stats)
+[![Dependencies Status](https://david-dm.org/mcollina/aedes-stats/status.svg)](https://david-dm.org/mcollina/aedes-stats)
+[![devDependencies Status](https://david-dm.org/mcollina/aedes-stats/dev-status.svg)](https://david-dm.org/mcollina/aedes-stats?type=dev)
+<br/>
+[![Known Vulnerabilities](https://snyk.io/test/github/mcollina/aedes-stats/badge.svg)](https://snyk.io/test/github/mcollina/aedes-stats)
+[![Coverage Status](https://coveralls.io/repos/mcollina/aedes-stats/badge.svg?branch=master&service=github)](https://coveralls.io/github/mcollina/aedes-stats?branch=master)
+[![NPM version](https://img.shields.io/npm/v/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)
+[![NPM downloads](https://img.shields.io/npm/dm/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)
 
-Stats for Aedes
+Stats for [Aedes](http://npm.im/aedes)
 
 ## Install
 

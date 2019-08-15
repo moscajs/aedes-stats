@@ -3,159 +3,134 @@
 var test = require('tape').test
 var mqtt = require('mqtt')
 var aedes = require('aedes')
+var stats = require('./stats')
 var net = require('net')
+var QlobberTrue = require('qlobber').QlobberTrue
+var matcher = new QlobberTrue({ wildcard_one: '+', wildcard_some: '#' })
 var port = 1889
+var clients = 0
+var server
 
-test('Connect a client and subscribe to get total number of clients', function (t) {
-  t.plan(1)
-
+function setup () {
   var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
-
+  stats(instance)
+  if (server && server.listening) {
+    server.close()
+  }
+  server = net.createServer(instance.handle)
   server.listen(port)
-  var subscriber
+  return {
+    instance,
+    server
+  }
+}
 
-  subscriber = mqtt.connect({
+function connect (s, opts = {}) {
+  s = Object.create(s)
+  var client = mqtt.connect({
     port: port,
     host: '127.0.0.1',
     clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
+    clientId: opts.clientId || 'my-client-' + clients++,
+    keepalive: opts.keepAlive || 200
   })
+  client.on('end', function () {
+    if (s.instance.connectedClients > 1) {
+      return
+    }
+    s.instance.close()
+    s.server.close()
+  })
+  return client
+}
 
-  subscriber.subscribe('$SYS/+/clients/total')
+function checkTopic (actual, expected) {
+  matcher.clear()
+  matcher.add(expected)
+  var bool = matcher.match(expected, actual)
+  matcher.clear()
+  return bool
+}
+
+test('Connect a client and subscribe to get total number of clients', function (t) {
+  t.plan(2)
+
+  var sysTopic = '$SYS/+/clients/total'
+  var subscriber = connect(setup())
+
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
     t.equal('1', message.toString(), 'clients connected')
     subscriber.end()
-    instance.close()
-    server.close()
+    t.end()
   })
 })
 
 test('Connect a client and subscribe to get maximum number of clients', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/clients/maximum'
+  var s = setup()
+  var subscriber = connect(s, { clientId: 'subscriber' })
+  var additionalClient = connect(s, { clientId: 'client' })
 
-  server.listen(port)
-  var subscriber, additionalClient
-
-  additionalClient = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'client',
-    keepalive: 200
-  })
-
-  subscriber = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
-  })
-
-  subscriber.subscribe('$SYS/+/clients/maximum')
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
     t.equal('2', message.toString(), 'clients connected')
     subscriber.end()
     additionalClient.end()
-    instance.close()
-    server.close()
+    t.end()
   })
 })
 
 test('Connect a client and subscribe to get current broker time', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/time'
+  var s = setup()
+  var subscriber = connect(s, { clientId: 'subscriber' })
+  var additionalClient = connect(s, { clientId: 'client' })
 
-  server.listen(port)
-  var subscriber, additionalClient
-
-  additionalClient = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'client',
-    keepalive: 200
-  })
-
-  subscriber = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
-  })
-
-  subscriber.subscribe('$SYS/+/time')
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
-    t.equal(instance.stats.time.toISOString(), message.toString(), 'current broker time')
+    t.ok(checkTopic(topic, sysTopic))
+    t.equal(s.instance.stats.time.toISOString(), message.toString(), 'current broker time')
     subscriber.end()
     additionalClient.end()
-    instance.close()
-    server.close()
+    t.end()
   })
 })
 
 test('Connect a client and subscribe to get broker up-time', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/uptime'
+  var s = setup()
+  var subscriber = connect(s)
 
-  server.listen(port)
-  var subscriber
-
-  subscriber = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
-  })
-
-  subscriber.subscribe('$SYS/+/uptime')
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
-    var seconds = Math.round((instance.stats.time - instance.stats.started) / 1000)
+    t.ok(checkTopic(topic, sysTopic))
+    var seconds = Math.round((s.instance.stats.time - s.instance.stats.started) / 1000)
     t.equal(seconds.toString(), message.toString(), 'Broker uptime')
     subscriber.end()
-    instance.close()
-    server.close()
+    t.end()
   })
 })
 
 test('Connect a client and subscribe to get the number of published messages', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/messages/publish/sent'
+  var publisher = connect(setup())
 
-  server.listen(port)
-  var publisher
-
-  publisher = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'client',
-    keepalive: 200
-  })
-
-  publisher.subscribe('$SYS/+/messages/publish/sent', onSub)
+  publisher.subscribe(sysTopic, onSub)
 
   function onSub () {
     publisher.publish('publishing', 'hey there')
@@ -163,69 +138,40 @@ test('Connect a client and subscribe to get the number of published messages', f
   }
 
   publisher.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
     t.equal('2', message.toString(), 'number of published messages')
     publisher.end()
-    instance.close()
-    server.close()
   })
 })
 
 test('Connect a client and and subscribe to get current heap usage', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/memory/heap/current'
+  var subscriber = connect(setup())
 
-  server.listen(port)
-  var subscriber
-
-  subscriber = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
-  })
-
-  subscriber.subscribe('$SYS/+/memory/heap/current')
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'bytes of heap used currently')
-    t.end()
     subscriber.end()
-    instance.close()
-    server.close()
+    t.end()
   })
 })
 
 test('Connect a client and and subscribe to get maximum heap usage', function (t) {
-  t.plan(1)
+  t.plan(2)
 
-  var instance = aedes()
-  var server = net.createServer(instance.handle)
-  require('./stats')(instance)
+  var sysTopic = '$SYS/+/memory/heap/maximum'
+  var subscriber = connect(setup())
 
-  server.listen(port)
-  var subscriber
-
-  subscriber = mqtt.connect({
-    port: port,
-    host: '127.0.0.1',
-    clean: true,
-    clientId: 'subscriber',
-    keepalive: 200
-  })
-
-  subscriber.subscribe('$SYS/+/memory/heap/maximum')
+  subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'max bytes of heap used till now')
-    t.end()
     subscriber.end()
-    instance.close()
-    server.close(function () {
-      process.exit(0)
-    })
+    t.end()
   })
 })

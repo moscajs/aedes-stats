@@ -33,6 +33,7 @@
   "devDependencies": {
     "aedes": "^0.39.0",
     "faucet": "0.0.1",
+    "license-checker": "^25.0.1",
     "mqtt": "^3.0.0",
     "nyc": "^14.1.1",
     "pre-commit": "^1.2.2",

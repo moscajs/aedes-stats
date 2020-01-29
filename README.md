@@ -1,10 +1,10 @@
 # aedes-stats
 ![](https://github.com/moscajs/aedes-stats/workflows/ci/badge.svg)
-[![Dependencies Status](https://david-dm.org/mcollina/aedes-stats/status.svg)](https://david-dm.org/mcollina/aedes-stats)
-[![devDependencies Status](https://david-dm.org/mcollina/aedes-stats/dev-status.svg)](https://david-dm.org/mcollina/aedes-stats?type=dev)
+[![Dependencies Status](https://david-dm.org/moscajs/aedes-stats/status.svg)](https://david-dm.org/moscajs/aedes-stats)
+[![devDependencies Status](https://david-dm.org/moscajs/aedes-stats/dev-status.svg)](https://david-dm.org/moscajs/aedes-stats?type=dev)
 <br/>
-[![Known Vulnerabilities](https://snyk.io/test/github/mcollina/aedes-stats/badge.svg)](https://snyk.io/test/github/mcollina/aedes-stats)
-[![Coverage Status](https://coveralls.io/repos/mcollina/aedes-stats/badge.svg?branch=master&service=github)](https://coveralls.io/github/mcollina/aedes-stats?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/moscajs/aedes-stats/badge.svg)](https://snyk.io/test/github/moscajs/aedes-stats)
+[![Coverage Status](https://coveralls.io/repos/moscajs/aedes-stats/badge.svg?branch=master&service=github)](https://coveralls.io/github/moscajs/aedes-stats?branch=master)
 [![NPM version](https://img.shields.io/npm/v/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)
 [![NPM downloads](https://img.shields.io/npm/dm/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)
 

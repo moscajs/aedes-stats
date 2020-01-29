@@ -1,5 +1,5 @@
 # aedes-stats
-[![Build Status](https://travis-ci.org/mcollina/aedes-stats.svg?branch=master)](https://travis-ci.org/mcollina/aedes-stats)
+![](https://github.com/moscajs/aedes-stats/workflows/ci/badge.svg)
 [![Dependencies Status](https://david-dm.org/mcollina/aedes-stats/status.svg)](https://david-dm.org/mcollina/aedes-stats)
 [![devDependencies Status](https://david-dm.org/mcollina/aedes-stats/dev-status.svg)](https://david-dm.org/mcollina/aedes-stats?type=dev)
 <br/>

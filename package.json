@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcollina/aedes-stats.git"
+    "url": "git+https://github.com/moscajs/aedes-stats.git"
   },
   "keywords": [
     "stats",
@@ -27,7 +27,7 @@
   "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mcollina/aedes-stats/issues"
+    "url": "https://github.com/moscajs/aedes-stats/issues"
   },
   "homepage": "https://github.com/mcollina/aedes-stats#readme",
   "devDependencies": {

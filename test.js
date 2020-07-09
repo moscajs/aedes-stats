@@ -195,7 +195,7 @@ test('Connect a client and subscribe to get cpu usage', function (t) {
 test('Connect a client and subscribe to get cpu avg of last 1 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/last/avg/1'
+  var sysTopic = '$SYS/+/cpu/avg/last/1'
   var subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
@@ -211,7 +211,7 @@ test('Connect a client and subscribe to get cpu avg of last 1 min', function (t)
 test('Connect a client and subscribe to get cpu avg of last 5 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/last/avg/5'
+  var sysTopic = '$SYS/+/cpu/avg/last/5'
   var subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
@@ -227,7 +227,7 @@ test('Connect a client and subscribe to get cpu avg of last 5 min', function (t)
 test('Connect a client and subscribe to get cpu avg of last 15 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/last/avg/15'
+  var sysTopic = '$SYS/+/cpu/avg/last/15'
   var subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)

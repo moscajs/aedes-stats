@@ -21,8 +21,6 @@ function cpuAverage () {
   }
 }
 
-var cpuUsageTimer = setInterval(cpuCalculation, 1000)
-
 function cpuCalculation () {
   var endMeasure = cpuAverage()
   var idleDifference = endMeasure.idle - startMeasure.idle
@@ -80,6 +78,7 @@ function wire (aedesInstance, options) {
   }
 
   var timer = setInterval(iterate, options.interval || (1 * 1000))
+  var cpuUsageTimer = setInterval(cpuCalculation, 1000)
 
   function iterate () {
     var stats = aedesInstance.stats

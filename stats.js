@@ -95,11 +95,11 @@ function wire (aedesInstance, options) {
     doPub('memory/heap/maximum', mem.heapTotal)
     doPub('cpu/usage', stats.cpuUsage)
     if (cpu && cpu.length >= 3) {
-        // ref: http://nodejs.org/api/os.html#os_os_loadavg
-        doPub('cpu/avg/last/1', cpu[0])
-        doPub('cpu/avg/last/5', cpu[1])
-        doPub('cpu/avg/last/15', cpu[2])
-      }
+      // ref: http://nodejs.org/api/os.html#os_os_loadavg
+      doPub('cpu/avg/last/1', cpu[0])
+      doPub('cpu/avg/last/5', cpu[1])
+      doPub('cpu/avg/last/15', cpu[2])
+    }
   }
 
   aedesEvents.forEach(function (event) {

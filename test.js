@@ -160,7 +160,7 @@ test('Connect a client and and subscribe to get current heap usage', function (t
   })
 })
 
-test('Connect a client and and subscribe to get maximum heap usage', function (t) {
+test('Connect a client and subscribe to get maximum heap usage', function (t) {
   t.plan(2)
 
   var sysTopic = '$SYS/+/memory/heap/maximum'
@@ -171,6 +171,22 @@ test('Connect a client and and subscribe to get maximum heap usage', function (t
   subscriber.on('message', function (topic, message) {
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'max bytes of heap used till now')
+    subscriber.end()
+    t.end()
+  })
+})
+
+test('Connect a client and subscribe to get cpu usage', function (t) {
+  t.plan(2)
+
+  var sysTopic = '$SYS/+/cpu/usage'
+  var subscriber = connect(setup())
+
+  subscriber.subscribe(sysTopic)
+
+  subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
+    t.pass(message.toString(), 'cpu usage')
     subscriber.end()
     t.end()
   })

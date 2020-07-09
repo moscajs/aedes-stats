@@ -48,16 +48,16 @@
   },
   "homepage": "https://github.com/mcollina/aedes-stats#readme",
   "devDependencies": {
-    "aedes": "^0.40.1",
+    "aedes": "^0.42.5",
     "faucet": "0.0.1",
     "license-checker": "^25.0.1",
-    "mqtt": "^3.0.0",
-    "nyc": "^15.0.0",
+    "mqtt": "^4.1.0",
+    "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
-    "qlobber": "^3.1.0",
+    "qlobber": "^5.0.0",
     "release-it": "^13.6.4",
     "snazzy": "^8.0.0",
-    "standard": "^14.3.1",
+    "standard": "^14.3.4",
     "tape": "^4.13.0"
   },
   "dependencies": {}

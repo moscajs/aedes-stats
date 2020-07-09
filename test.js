@@ -191,3 +191,51 @@ test('Connect a client and subscribe to get cpu usage', function (t) {
     t.end()
   })
 })
+
+test('Connect a client and subscribe to get cpu avg of last 1 min', function (t) {
+  t.plan(2)
+
+  var sysTopic = '$SYS/+/cpu/last/avg/1'
+  var subscriber = connect(setup())
+
+  subscriber.subscribe(sysTopic)
+
+  subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
+    t.pass(message.toString(), 'cpu avg of last 1 min')
+    subscriber.end()
+    t.end()
+  })
+})
+
+test('Connect a client and subscribe to get cpu avg of last 5 min', function (t) {
+  t.plan(2)
+
+  var sysTopic = '$SYS/+/cpu/last/avg/5'
+  var subscriber = connect(setup())
+
+  subscriber.subscribe(sysTopic)
+
+  subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
+    t.pass(message.toString(), 'cpu avg of last 5 min')
+    subscriber.end()
+    t.end()
+  })
+})
+
+test('Connect a client and subscribe to get cpu avg of last 15 min', function (t) {
+  t.plan(2)
+
+  var sysTopic = '$SYS/+/cpu/last/avg/15'
+  var subscriber = connect(setup())
+
+  subscriber.subscribe(sysTopic)
+
+  subscriber.on('message', function (topic, message) {
+    t.ok(checkTopic(topic, sysTopic))
+    t.pass(message.toString(), 'cpu avg of last 15 min')
+    subscriber.end()
+    t.end()
+  })
+})

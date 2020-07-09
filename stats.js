@@ -26,7 +26,7 @@ function cpuCalculation () {
   var idleDifference = endMeasure.idle - startMeasure.idle
   var totalDifference = endMeasure.total - startMeasure.total
   var cpuPercentage = 100 - ~~(100 * idleDifference / totalDifference)
-  this.stats.cpuUsage = cpuPercentage
+  return cpuPercentage
 }
 
 function client () {
@@ -78,7 +78,7 @@ function wire (aedesInstance, options) {
   }
 
   var timer = setInterval(iterate, options.interval || (1 * 1000))
-  var cpuUsageTimer = setInterval(cpuCalculation, 1000)
+  var cpuUsageTimer = setInterval(function () { aedesInstance.stats.cpuUsage = cpuCalculation() }, 1000)
 
   function iterate () {
     var stats = aedesInstance.stats

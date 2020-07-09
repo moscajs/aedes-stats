@@ -21,7 +21,7 @@ function cpuAverage () {
   }
 }
 
-var cpuUsageInterval = setInterval(cpuCalculation, 1000)
+var cpuUsageTimer = setInterval(cpuCalculation, 1000)
 
 function cpuCalculation () {
   var endMeasure = cpuAverage()
@@ -67,7 +67,7 @@ function wire (aedesInstance, options) {
     publishedMessages: 0,
     started: new Date(),
     time: new Date(),
-    cpuUsage: 0,
+    cpuUsage: 0
   }
 
   function doPub (topic, value) {
@@ -102,6 +102,7 @@ function wire (aedesInstance, options) {
 
   aedesInstance.once('closed', function () {
     clearInterval(timer)
+    clearInterval(cpuUsageTimer)
     aedesEvents.forEach(function (event) {
       aedesInstance.removeListener(event.name, event)
     })

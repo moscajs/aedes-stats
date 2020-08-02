@@ -23,7 +23,7 @@ var aedes = require('aedes')
 var stats = require('aedes-stats')
 var instance = aedes()
 
-stats(aedes)
+stats(instance)
 ```
 
 ## Options

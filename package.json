@@ -54,17 +54,17 @@
     "node": ">=12"
   },
   "devDependencies": {
-    "aedes": "^0.42.5",
+    "aedes": "^0.46.2",
     "faucet": "0.0.1",
     "license-checker": "^25.0.1",
     "markdownlint-cli": "^0.31.0",
-    "mqtt": "^4.1.0",
+    "mqtt": "^4.3.4",
     "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
-    "qlobber": "^5.0.0",
-    "release-it": "^13.6.4",
-    "snazzy": "^8.0.0",
+    "qlobber": "^6.0.0",
+    "release-it": "^14.12.4",
+    "snazzy": "^9.0.0",
     "standard": "^16.0.4",
-    "tape": "^4.13.0"
+    "tape": "^5.5.0"
   }
 }

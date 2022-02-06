@@ -1,6 +1,6 @@
 'use strict'
 
-const test = require('tape').test
+const { test } = require('tap')
 const mqtt = require('mqtt')
 const aedes = require('aedes')
 const stats = require('./stats')

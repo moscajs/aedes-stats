@@ -47,6 +47,9 @@
     "url": "https://github.com/moscajs/aedes-stats/issues"
   },
   "homepage": "https://github.com/moscajs/aedes-stats#readme",
+  "engines": {
+    "node": ">=12"
+  },
   "devDependencies": {
     "aedes": "^0.42.5",
     "faucet": "0.0.1",

@@ -46,7 +46,7 @@
   "bugs": {
     "url": "https://github.com/moscajs/aedes-stats/issues"
   },
-  "homepage": "https://github.com/mcollina/aedes-stats#readme",
+  "homepage": "https://github.com/moscajs/aedes-stats#readme",
   "devDependencies": {
     "aedes": "^0.42.5",
     "faucet": "0.0.1",

@@ -1,16 +1,16 @@
 'use strict'
 
-var os = require('os')
+const os = require('os')
 
-var startMeasure = cpuAverage()
+const startMeasure = cpuAverage()
 
 function cpuAverage () {
-  var totalIdle = 0
-  var totalTick = 0
-  var cpus = os.cpus()
-  for (var i = 0, len = cpus.length; i < len; i++) {
-    var cpu = cpus[i]
-    for (var type in cpu.times) {
+  let totalIdle = 0
+  let totalTick = 0
+  const cpus = os.cpus()
+  for (let i = 0, len = cpus.length; i < len; i++) {
+    const cpu = cpus[i]
+    for (const type in cpu.times) {
       totalTick += cpu.times[type]
     }
     totalIdle += cpu.times.idle
@@ -22,10 +22,10 @@ function cpuAverage () {
 }
 
 function cpuCalculation () {
-  var endMeasure = cpuAverage()
-  var idleDifference = endMeasure.idle - startMeasure.idle
-  var totalDifference = endMeasure.total - startMeasure.total
-  var cpuPercentage = 100 - ~~(100 * idleDifference / totalDifference)
+  const endMeasure = cpuAverage()
+  const idleDifference = endMeasure.idle - startMeasure.idle
+  const totalDifference = endMeasure.total - startMeasure.total
+  const cpuPercentage = 100 - ~~(100 * idleDifference / totalDifference)
   return cpuPercentage
 }
 
@@ -46,7 +46,7 @@ function publish (packet) {
   }
 }
 
-var aedesEvents = [
+const aedesEvents = [
   client,
   clientDisconnect,
   publish
@@ -77,15 +77,15 @@ function wire (aedesInstance, options) {
     })
   }
 
-  var timer = setInterval(iterate, options.interval || (1 * 1000))
-  var cpuUsageTimer = setInterval(function () { aedesInstance.stats.cpuUsage = cpuCalculation() }, 1000)
+  const timer = setInterval(iterate, options.interval || (1 * 1000))
+  const cpuUsageTimer = setInterval(function () { aedesInstance.stats.cpuUsage = cpuCalculation() }, 1000)
 
   function iterate () {
-    var stats = aedesInstance.stats
+    const stats = aedesInstance.stats
     stats.time = new Date()
-    var uptime = Math.round((stats.time - stats.started) / 1000)
-    var mem = process.memoryUsage()
-    var cpu = os.loadavg()
+    const uptime = Math.round((stats.time - stats.started) / 1000)
+    const mem = process.memoryUsage()
+    const cpu = os.loadavg()
     doPub('uptime', uptime)
     doPub('time', aedesInstance.stats.time.toISOString())
     doPub('clients/total', stats.connectedClients)

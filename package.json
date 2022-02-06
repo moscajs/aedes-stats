@@ -64,7 +64,7 @@
     "qlobber": "^5.0.0",
     "release-it": "^13.6.4",
     "snazzy": "^8.0.0",
-    "standard": "^14.3.4",
+    "standard": "^16.0.4",
     "tape": "^4.13.0"
   }
 }

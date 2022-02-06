@@ -1,18 +1,18 @@
 'use strict'
 
-var test = require('tape').test
-var mqtt = require('mqtt')
-var aedes = require('aedes')
-var stats = require('./stats')
-var net = require('net')
-var QlobberTrue = require('qlobber').QlobberTrue
-var matcher = new QlobberTrue({ wildcard_one: '+', wildcard_some: '#' })
-var port = 1889
-var clients = 0
-var server
+const test = require('tape').test
+const mqtt = require('mqtt')
+const aedes = require('aedes')
+const stats = require('./stats')
+const net = require('net')
+const QlobberTrue = require('qlobber').QlobberTrue
+const matcher = new QlobberTrue({ wildcard_one: '+', wildcard_some: '#' })
+const port = 1889
+let clients = 0
+let server
 
 function setup () {
-  var instance = aedes()
+  const instance = aedes()
   stats(instance)
   if (server && server.listening) {
     server.close()
@@ -27,7 +27,7 @@ function setup () {
 
 function connect (s, opts = {}) {
   s = Object.create(s)
-  var client = mqtt.connect({
+  const client = mqtt.connect({
     port: port,
     host: '127.0.0.1',
     clean: true,
@@ -47,7 +47,7 @@ function connect (s, opts = {}) {
 function checkTopic (actual, expected) {
   matcher.clear()
   matcher.add(expected)
-  var bool = matcher.match(expected, actual)
+  const bool = matcher.match(expected, actual)
   matcher.clear()
   return bool
 }
@@ -55,8 +55,8 @@ function checkTopic (actual, expected) {
 test('Connect a client and subscribe to get total number of clients', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/clients/total'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/clients/total'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -71,10 +71,10 @@ test('Connect a client and subscribe to get total number of clients', function (
 test('Connect a client and subscribe to get maximum number of clients', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/clients/maximum'
-  var s = setup()
-  var subscriber = connect(s, { clientId: 'subscriber' })
-  var additionalClient = connect(s, { clientId: 'client' })
+  const sysTopic = '$SYS/+/clients/maximum'
+  const s = setup()
+  const subscriber = connect(s, { clientId: 'subscriber' })
+  const additionalClient = connect(s, { clientId: 'client' })
 
   subscriber.subscribe(sysTopic)
 
@@ -90,10 +90,10 @@ test('Connect a client and subscribe to get maximum number of clients', function
 test('Connect a client and subscribe to get current broker time', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/time'
-  var s = setup()
-  var subscriber = connect(s, { clientId: 'subscriber' })
-  var additionalClient = connect(s, { clientId: 'client' })
+  const sysTopic = '$SYS/+/time'
+  const s = setup()
+  const subscriber = connect(s, { clientId: 'subscriber' })
+  const additionalClient = connect(s, { clientId: 'client' })
 
   subscriber.subscribe(sysTopic)
 
@@ -109,15 +109,15 @@ test('Connect a client and subscribe to get current broker time', function (t) {
 test('Connect a client and subscribe to get broker up-time', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/uptime'
-  var s = setup()
-  var subscriber = connect(s)
+  const sysTopic = '$SYS/+/uptime'
+  const s = setup()
+  const subscriber = connect(s)
 
   subscriber.subscribe(sysTopic)
 
   subscriber.on('message', function (topic, message) {
     t.ok(checkTopic(topic, sysTopic))
-    var seconds = Math.round((s.instance.stats.time - s.instance.stats.started) / 1000)
+    const seconds = Math.round((s.instance.stats.time - s.instance.stats.started) / 1000)
     t.equal(seconds.toString(), message.toString(), 'Broker uptime')
     subscriber.end()
     t.end()
@@ -127,8 +127,8 @@ test('Connect a client and subscribe to get broker up-time', function (t) {
 test('Connect a client and subscribe to get the number of published messages', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/messages/publish/sent'
-  var publisher = connect(setup())
+  const sysTopic = '$SYS/+/messages/publish/sent'
+  const publisher = connect(setup())
 
   publisher.subscribe(sysTopic, onSub)
 
@@ -147,8 +147,8 @@ test('Connect a client and subscribe to get the number of published messages', f
 test('Connect a client and and subscribe to get current heap usage', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/memory/heap/current'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/memory/heap/current'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -163,8 +163,8 @@ test('Connect a client and and subscribe to get current heap usage', function (t
 test('Connect a client and subscribe to get maximum heap usage', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/memory/heap/maximum'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/memory/heap/maximum'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -179,8 +179,8 @@ test('Connect a client and subscribe to get maximum heap usage', function (t) {
 test('Connect a client and subscribe to get cpu usage', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/usage'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/cpu/usage'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -195,8 +195,8 @@ test('Connect a client and subscribe to get cpu usage', function (t) {
 test('Connect a client and subscribe to get cpu avg of last 1 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/avg/last/1'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/cpu/avg/last/1'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -211,8 +211,8 @@ test('Connect a client and subscribe to get cpu avg of last 1 min', function (t)
 test('Connect a client and subscribe to get cpu avg of last 5 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/avg/last/5'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/cpu/avg/last/5'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 
@@ -227,8 +227,8 @@ test('Connect a client and subscribe to get cpu avg of last 5 min', function (t)
 test('Connect a client and subscribe to get cpu avg of last 15 min', function (t) {
   t.plan(2)
 
-  var sysTopic = '$SYS/+/cpu/avg/last/15'
-  var subscriber = connect(setup())
+  const sysTopic = '$SYS/+/cpu/avg/last/15'
+  const subscriber = connect(setup())
 
   subscriber.subscribe(sysTopic)
 

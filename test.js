@@ -64,7 +64,6 @@ test('Connect a client and subscribe to get total number of clients', function (
     t.ok(checkTopic(topic, sysTopic))
     t.equal('1', message.toString(), 'clients connected')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -83,7 +82,6 @@ test('Connect a client and subscribe to get maximum number of clients', function
     t.equal('2', message.toString(), 'clients connected')
     subscriber.end()
     additionalClient.end()
-    t.end()
   })
 })
 
@@ -102,7 +100,6 @@ test('Connect a client and subscribe to get current broker time', function (t) {
     t.equal(s.instance.stats.time.toISOString(), message.toString(), 'current broker time')
     subscriber.end()
     additionalClient.end()
-    t.end()
   })
 })
 
@@ -120,7 +117,6 @@ test('Connect a client and subscribe to get broker up-time', function (t) {
     const seconds = Math.round((s.instance.stats.time - s.instance.stats.started) / 1000)
     t.equal(seconds.toString(), message.toString(), 'Broker uptime')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -156,7 +152,6 @@ test('Connect a client and and subscribe to get current heap usage', function (t
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'bytes of heap used currently')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -172,7 +167,6 @@ test('Connect a client and subscribe to get maximum heap usage', function (t) {
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'max bytes of heap used till now')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -188,7 +182,6 @@ test('Connect a client and subscribe to get cpu usage', function (t) {
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'cpu usage')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -204,7 +197,6 @@ test('Connect a client and subscribe to get cpu avg of last 1 min', function (t)
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'cpu avg of last 1 min')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -220,7 +212,6 @@ test('Connect a client and subscribe to get cpu avg of last 5 min', function (t)
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'cpu avg of last 5 min')
     subscriber.end()
-    t.end()
   })
 })
 
@@ -236,6 +227,5 @@ test('Connect a client and subscribe to get cpu avg of last 15 min', function (t
     t.ok(checkTopic(topic, sysTopic))
     t.pass(message.toString(), 'cpu avg of last 15 min')
     subscriber.end()
-    t.end()
   })
 })

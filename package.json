@@ -4,7 +4,10 @@
   "description": "stats for aedes",
   "main": "stats.js",
   "scripts": {
-    "lint": "standard --verbose | snazzy",
+    "lint": "npm run lint:standard && npm run lint:markdown",
+    "lint:fix": "standard --fix",
+    "lint:standard": "standard --verbose | snazzy",
+    "lint:markdown": "markdownlint docs/*.md README.md",
     "unit": "tape test.js | faucet",
     "test": "npm run lint && npm run unit",
     "coverage": "nyc --reporter=lcov tape test.js",
@@ -54,6 +57,7 @@
     "aedes": "^0.42.5",
     "faucet": "0.0.1",
     "license-checker": "^25.0.1",
+    "markdownlint-cli": "^0.31.0",
     "mqtt": "^4.1.0",
     "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
@@ -62,6 +66,5 @@
     "snazzy": "^8.0.0",
     "standard": "^14.3.4",
     "tape": "^4.13.0"
-  },
-  "dependencies": {}
+  }
 }

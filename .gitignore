@@ -25,13 +25,39 @@ coverage
 build/Release
 
 # Dependency directories
+# Commenting this out is preferred by some people, see
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 jspm_packages
+
+# Users Environment Variables
+.lock-wscript
+.vscode
+*code-workspace
+
+# 0x
+flamegraph.html
+.__*
+profile*
+
+# mac files
+.DS_Store
+
+# vim swap files
+*.swp
+
+# lock files
+package-lock.json
+
+# generated code
+test/typescript/*.js
+test/typescript/*.map
+
+# test tap report
+out.tap
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
-
-package-lock.json

@@ -8,10 +8,11 @@
     "lint:fix": "standard --fix",
     "lint:standard": "standard --verbose | snazzy",
     "lint:markdown": "markdownlint docs/*.md README.md",
-    "unit": "tape test.js | faucet",
     "test": "npm run lint && npm run unit",
-    "coverage": "nyc --reporter=lcov tape test.js",
-    "test:ci": "npm run lint && npm run coverage",
+    "test:ci": "npm run lint && npm run unit -- --cov --no-check-coverage --coverage-report=lcovonly",
+    "test:report": "npm run lint && npm run unit:report",
+    "unit": "tap -J test.js",
+    "unit:report": "tap -J test.js --cov --coverage-report=html --coverage-report=cobertura | tee out.tap",
     "license-checker": "license-checker --production --onlyAllow=\"MIT;ISC;BSD-3-Clause;BSD-2-Clause\"",
     "release": "read -p 'GITHUB_TOKEN: ' GITHUB_TOKEN && export GITHUB_TOKEN=$GITHUB_TOKEN && release-it --disable-metrics"
   },
@@ -24,7 +25,7 @@
     },
     "hooks": {
       "before:init": [
-        "npm run test"
+        "npm run test:ci"
       ]
     },
     "npm": {
@@ -55,16 +56,14 @@
   },
   "devDependencies": {
     "aedes": "^0.46.2",
-    "faucet": "0.0.1",
     "license-checker": "^25.0.1",
     "markdownlint-cli": "^0.31.0",
     "mqtt": "^4.3.4",
-    "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
     "qlobber": "^6.0.0",
     "release-it": "^14.12.4",
     "snazzy": "^9.0.0",
     "standard": "^16.0.4",
-    "tape": "^5.5.0"
+    "tap": "^15.1.6"
   }
 }

@@ -8,8 +8,6 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/moscajs/aedes-stats.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/moscajs/aedes-stats/context:javascript)
 [![Coverage Status](https://coveralls.io/repos/moscajs/aedes-stats/badge.svg?branch=main&service=github)](https://coveralls.io/github/moscajs/aedes-stats?branch=main)
 [![Known Vulnerabilities](https://snyk.io/test/github/moscajs/aedes-stats/badge.svg)](https://snyk.io/test/github/moscajs/aedes-stats)\
-[![Dependencies Status](https://david-dm.org/moscajs/aedes-stats/status.svg)](https://david-dm.org/moscajs/aedes-stats)
-[![devDependencies Status](https://david-dm.org/moscajs/aedes-stats/dev-status.svg)](https://david-dm.org/moscajs/aedes-stats?type=dev)\
 ![node](https://img.shields.io/node/v/aedes-stats)
 [![NPM version](https://img.shields.io/npm/v/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)
 [![NPM downloads](https://img.shields.io/npm/dm/aedes-stats.svg?style=flat)](https://www.npmjs.com/package/aedes-stats)

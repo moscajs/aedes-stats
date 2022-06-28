@@ -61,7 +61,7 @@
     "mqtt": "^4.3.4",
     "pre-commit": "^1.2.2",
     "qlobber": "^6.0.0",
-    "release-it": "^14.12.4",
+    "release-it": "^15.1.1",
     "snazzy": "^9.0.0",
     "standard": "^16.0.4",
     "tap": "^15.1.6"

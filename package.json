@@ -57,7 +57,7 @@
   "devDependencies": {
     "aedes": "^0.46.2",
     "license-checker": "^25.0.1",
-    "markdownlint-cli": "^0.31.0",
+    "markdownlint-cli": "^0.32.1",
     "mqtt": "^4.3.4",
     "pre-commit": "^1.2.2",
     "qlobber": "^6.0.0",

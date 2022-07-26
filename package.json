@@ -63,7 +63,7 @@
     "qlobber": "^6.0.0",
     "release-it": "^15.1.4",
     "snazzy": "^9.0.0",
-    "standard": "^16.0.4",
+    "standard": "^17.0.0",
     "tap": "^15.1.6"
   }
 }

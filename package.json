@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/moscajs/aedes-stats#readme",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "devDependencies": {
     "aedes": "^0.47.0",

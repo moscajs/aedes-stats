@@ -28,7 +28,7 @@ function setup () {
 function connect (s, opts = {}) {
   s = Object.create(s)
   const client = mqtt.connect({
-    port: port,
+    port,
     host: '127.0.0.1',
     clean: true,
     clientId: opts.clientId || 'my-client-' + clients++,

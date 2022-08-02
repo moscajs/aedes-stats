@@ -55,15 +55,15 @@
     "node": ">=12"
   },
   "devDependencies": {
-    "aedes": "^0.46.2",
+    "aedes": "^0.47.0",
     "license-checker": "^25.0.1",
-    "markdownlint-cli": "^0.31.0",
-    "mqtt": "^4.3.4",
+    "markdownlint-cli": "^0.32.1",
+    "mqtt": "^4.3.7",
     "pre-commit": "^1.2.2",
-    "qlobber": "^6.0.0",
-    "release-it": "^15.1.4",
+    "qlobber": "^7.0.1",
+    "release-it": "^15.2.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
-    "tap": "^15.1.6"
+    "tap": "^16.3.0"
   }
 }

@@ -55,7 +55,7 @@
     "node": ">=14"
   },
   "devDependencies": {
-    "aedes": "^0.47.0",
+    "aedes": "^0.48.0",
     "license-checker": "^25.0.1",
     "markdownlint-cli": "^0.32.1",
     "mqtt": "^4.3.7",

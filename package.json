@@ -60,7 +60,7 @@
     "markdownlint-cli": "^0.32.1",
     "mqtt": "^4.3.7",
     "pre-commit": "^1.2.2",
-    "qlobber": "^7.0.1",
+    "qlobber": "^8.0.1",
     "release-it": "^15.2.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
